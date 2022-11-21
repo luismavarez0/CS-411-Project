@@ -1,0 +1,12 @@
+import http.client
+
+conn = http.client.HTTPSConnection("timetable-lookup.p.rapidapi.com")
+payload = ''
+headers = {
+  'X-RapidAPI-Key': 'dad20bcabbmsh57e3ee17ffa309fp14efbejsnaba5eed1ea7f',
+  'X-RapidAPI-Host': 'timetable-lookup.p.rapidapi.com'
+}
+conn.request("GET", "/TimeTable/BOS/LAX/20191217/", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
