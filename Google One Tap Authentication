@@ -1,0 +1,8 @@
+{"installed":{"client_id":"114840074781-2u6bn2dkmmk63bbme30giqkfe5grm8c9.apps.googleusercontent.com","project_id":"cs411-370414","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","redirect_uris":["http://localhost"]}}
+
+<div id="g_id_onload"
+     data-client_id="114840074781-2u6bn2dkmmk63bbme30giqkfe5grm8c9.apps.googleusercontent.com"
+     data-login_uri="https://your.domain/your_login_endpoint"
+     data-your_own_param_1_to_login="any_value"
+     data-your_own_param_2_to_login="any_value">
+</div>
