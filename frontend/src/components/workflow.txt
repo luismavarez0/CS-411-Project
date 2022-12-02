@@ -1,0 +1,14 @@
+Landing page with login Authentication, style with background and scroll to bottom where you log in
+
+Once passed authentication, go to find flight page. enter origin and destination and get supplied with the cheapest flight
+            - Store the user's origin, destination, and flight in Django DB
+
+Go to find accommodations page
+            - User enters in location
+            - Supply the cheapest accommodations within 10 miles
+            - Store location and accommodations in Django DB
+
+Go to end result page
+            - Display the user's cheapest flight and accommodations options. Button to return to find flights page
+
+
