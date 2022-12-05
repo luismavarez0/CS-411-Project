@@ -43,9 +43,9 @@ const SignUp = () => {
 
     return (
         <div className={"bg-slate-500 h-screen"}>
-            <div className={"w-1/2 mx-auto mt-60 border-2 flex flex-col border-gray-700 rounded-lg"}>
+            <div className={"w-1/2 mx-auto border-2 flex flex-col border-gray-700 rounded-lg"}>
                 <h1 className={"text-center"}> Sign up by entering your email and password below:</h1>
-                <div className={"flex flex-col w-full"}>
+
                     {inputs.map(each => {
                         return (
                             <Inputs placeHolder={each[0]} funcCall={each[1]}></Inputs>
@@ -53,7 +53,7 @@ const SignUp = () => {
                     })}
                     <NavigateButton buttonFunction={handleAccSignup} buttonText={"Complete account signup and login"}></NavigateButton>
                 </div>
-            </div>
+
         </div>
 
 
