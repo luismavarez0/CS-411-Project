@@ -1,9 +1,10 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -12,6 +13,7 @@ def hello_world():  # put application's code here
 
 @app.route("/signin", methods=['GET', 'POST'])
 def handle_signin():
+    print(request.data)
     user_data = json.loads(request.data)
     user_name = user_data["name"]
     user_password = user_data["password"]

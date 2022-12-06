@@ -10,6 +10,7 @@ const SignUp = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [displayError, setDisplayError] = useState("");
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -26,7 +27,7 @@ const SignUp = () => {
         });
 
         const config = {
-            method: 'get',
+            method: 'post',
             url: 'http://127.0.0.1:5000/signin',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +38,7 @@ const SignUp = () => {
         try{
             const authRes = await axios(config);
             if(authRes.data === "use does not exist" || authRes.data === "wrong password") {
-                console.log(authRes.data)
+                setDisplayError(authRes.data)
             } else {
                 navigate("/");
             }
@@ -60,7 +61,7 @@ const SignUp = () => {
                     )
                 })}
                 <NavigateButton buttonFunction={handleSignIn} buttonText={"Sign In"}></NavigateButton>
-
+                {displayError === "" ? null : <h1>{displayError}</h1>}
             </div>
 
         </div>
