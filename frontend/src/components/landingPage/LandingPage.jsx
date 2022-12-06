@@ -33,6 +33,10 @@ const LandingPage = () => {
         setUser({});
         document.getElementById("signInDiv").hidden = false;
     }
+
+    function handleSignin() {
+        navigate("/signin");
+    }
     
     useEffect(() => {
         /* global google */
@@ -69,6 +73,7 @@ const LandingPage = () => {
                     <button className={buttonStyle} id={"signUp"} onClick={navToSignUp}>Click here to sign up</button>
                     <button className={buttonStyle} id={"flights"} onClick={navToFlights}>Click here to find flights</button>
                     <button className={buttonStyle} id={"accommodations"} onClick={navToAccommodations}>Click here to find accommodations</button>
+                    <button className={buttonStyle} id={"signin"} onClick={handleSignin}>Click here to sign in</button>
 
 
                     <div id="signInDiv"></div>
