@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Inputs from "./Inputs";
 import NavigateButton from "./Navigate";
 const SignUp = () => {
@@ -34,6 +34,13 @@ const SignUp = () => {
         }
     }
 
+    useEffect(() => {
+        setPasswordMatch(password === reenterPassword);
+
+    }, [password, reenterPassword])
+
+
+
     const handleAccSignup = () => {
         if (checkPassMatch()){
             navigate("/"); }
@@ -52,6 +59,9 @@ const SignUp = () => {
                         )
                     })}
                     <NavigateButton buttonFunction={handleAccSignup} buttonText={"Complete account signup and login"}></NavigateButton>
+
+                {passwordMatch ? null : <NavigateButton buttonFunction={handleAccSignup} buttonText={"Password don't match"}></NavigateButton>
+                }
                 </div>
 
         </div>
