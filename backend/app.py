@@ -25,7 +25,7 @@ def handle_signin():
             return user_name if user_file[user_name] == user_password else "wrong password"
 
 
-@app.route("/signup")
+@app.route("/signup", methods=['GET', 'POST'])
 def handle_signup():
     user_data = json.loads(request.data)
     user_name = user_data["name"]
