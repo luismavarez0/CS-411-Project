@@ -10,8 +10,12 @@ const LandingPage = () => {
         navigate("/signup")
     }
 
-    const navToSignIn = (event) => {
-        navigate("/signin")
+    const navToFlights = (event) => {
+        navigate("/flights")
+    }
+
+    const navToAccommodations = (event) => {
+        navigate("/accommodations")
     }
 
 
@@ -25,10 +29,13 @@ const LandingPage = () => {
         setUser(userObject);
         document.getElementById("signInDiv").hidden = true;
     }
-
     function handleSignOut(event){
         setUser({});
         document.getElementById("signInDiv").hidden = false;
+    }
+
+    function handleSignin() {
+        navigate("/signin");
     }
     
     useEffect(() => {
@@ -55,10 +62,10 @@ const LandingPage = () => {
     }, []);
 
     return(
-        <div className={"bg-slate-700 text-white"}>
+
+        <div className={"bg-slate-500 text-white"}>
             <h1 className={"text-center text-4xl"}>CS411 Group Project</h1>
             <h2 className={"text-center text-xl mt-4"}>The one stop shop for cheap travel</h2>
-            
 
             <div className={"w-screen h-screen flex justify-center"}>
                 <div className={"h-full flex flex-col justify-center"}>
@@ -77,7 +84,24 @@ const LandingPage = () => {
                         <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
                     }       
                     <button className={buttonStyle} id={"signUp"} onClick={navToSignUp}>Click here to sign up</button>
-                    <button className={buttonStyle} id={"SignIn"} onClick={navToSignIn}>Click here to sign in</button>
+                    <button className={buttonStyle} id={"flights"} onClick={navToFlights}>Click here to find flights</button>
+                    <button className={buttonStyle} id={"accommodations"} onClick={navToAccommodations}>Click here to find accommodations</button>
+                    <button className={buttonStyle} id={"signin"} onClick={handleSignin}>Click here to sign in</button>
+
+
+                    <div id="signInDiv"></div>
+                    {/* Show some user info when signed in */}
+                    { user &&
+                        <div>
+                            <img src={user.picture}></img>
+                            <h3>{user.name}</h3>
+                        </div>
+                    }
+
+                    {/* Show sign out button if user is signed in */}
+                    { Object.keys(user).length !== 0 &&
+                        <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
+                    }
                 </div>
             </div>
 
