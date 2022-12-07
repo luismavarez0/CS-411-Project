@@ -13,6 +13,23 @@ const Accommodations = () => {
     }
 
     const findAccommodations = (event) => {
+        const data = null;
+
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("GET", "https://hotels4.p.rapidapi.com/v2/get-meta-data");
+        xhr.setRequestHeader("X-RapidAPI-Key", "dad20bcabbmsh57e3ee17ffa309fp14efbejsnaba5eed1ea7f");
+        xhr.setRequestHeader("X-RapidAPI-Host", "hotels4.p.rapidapi.com");
+
+        xhr.send(data);
+        
         navigate("/");
     }
     return(
