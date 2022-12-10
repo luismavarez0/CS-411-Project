@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Inputs from "./Inputs";
 import NavigateButton from "./Navigate";
+import axios from "axios";
 const SignUp = () => {
 
     const navigate = useNavigate();
@@ -41,9 +42,29 @@ const SignUp = () => {
 
 
 
-    const handleAccSignup = () => {
+    const handleAccSignup = async () => {
         if (checkPassMatch()){
-            navigate("/"); }
+            const data = JSON.stringify({
+                "name": email,
+                "password": password
+            });
+
+            const config = {
+                method: 'post',
+                url: 'http://127.0.0.1:5000/signup',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : data
+            };
+            try {
+                const res = await axios(config);
+                console.log(res);
+            } catch (e) {
+                console.log(e)
+            }
+            navigate("/");
+        }
     }
 
     const inputs = [["email", handleEmail], ["password", handlePassword], ["reenterPassword", handleReEntry]];
