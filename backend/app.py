@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
+import requests
 import json
 
 app = Flask(__name__)
@@ -41,6 +42,32 @@ def handle_signup():
 
     return "this is working"
 
+
+@app.route("/getflight", methods=["GET", "POST"])
+def get_flight():
+    user_data = request.args
+    origin = user_data["origin"]
+    destination = user_data["destination"]
+
+    data_file = open("config.json", "r")
+    data = json.load(data_file)
+    APIKey = data["flighAPIKey"]
+    data_file.close()
+
+    res = requests.get(f"https://api.flightapi.io/roundtrip/{APIKey}/{origin}/{destination}/2023-01-10/2023-01-12/1/0/1/Economy/USD")
+    parsed = res.json()
+    res = []
+    for each in parsed["legs"]:
+        temp = {
+            "departureTime": each["departureTime"],
+            "arrivalTime": each["arrivalTime"],
+            "departureAirportCode": each["departureAirportCode"],
+            "arrivalAirportCode": each["arrivalAirportCode"],
+            "price": each["score"] / 2
+        }
+        res.append(temp)
+
+    return res
 
 if __name__ == '__main__':
     app.run()
