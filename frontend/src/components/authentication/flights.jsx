@@ -1,52 +1,49 @@
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import NavigateButton from "./Navigate";
-import Inputs from "./Inputs";
+import React from "react";
+import axios from 'axios';
 
 const Flights = () => {
-    const navigate = useNavigate();
-    const [origin, setOrigin] = useState("");
-    const [destination, setDestination] = useState("");
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '1418f00a1cmsh0b0a8ff349c39a5p1d1310jsn01479a90c739',
+// 		'X-RapidAPI-Host': 'skyscanner44.p.rapidapi.com'
+// 	}
+  
+// };
 
-    const handleOrigin = (event) => {
-        setOrigin(event.target.value);
+// fetch('https://skyscanner44.p.rapidapi.com/search-extended?adults=1&origin=MUC&destination=BER&departureDate=2022-10-11&currency=EUR&stops=0%2C1%2C2&duration=50&startFrom=00%3A00&arriveTo=23%3A59&returnStartFrom=00%3A00&returnArriveTo=23%3A59', options)
+// 	.then(response => response.json())
+// 	.then(response => console.log(response))
+// 	.catch(err => console.error(err));
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '1418f00a1cmsh0b0a8ff349c39a5p1d1310jsn01479a90c739',
+      'X-RapidAPI-Host': 'skyscanner44.p.rapidapi.com'
     }
+  }
+  const params = new URLSearchParams({
+    adults: '1',
+    origin: 'BOS',
+    destination: 'LGA',
+    departureDate: '2022-12-15',
+    returnDate: '2022-12-17',
+    currency: 'EUR',
+    stops: '0,1,2',
+    duration: '50',
+    startFrom: '00:00',
+    arriveTo: '23:59',
+    returnStartFrom: '00:00',
+    returnArriveTo: '23:59'
+  })
+  
+  const url = `https://skyscanner44.p.rapidapi.com/search-extended?${ params.toString() }`
+  console.log(url)
 
-    const handleDestination = (event) => {
-        setDestination(event.target.value);
-    }
-
-    const findFlights = (event) => {
-        //IMPLEMENT API TO FIND THE FLIGHTS
-        const data = null;
-
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        xhr.addEventListener("readystatechange", function () {
-            if (this.readyState === this.DONE) {
-                console.log(this.responseText);
-            }
-        });
-
-        xhr.open("GET", "https://timetable-lookup.p.rapidapi.com/airlines/%7Bairlineiatacode%7D/routes/directs/%7Bairportiatacode%7D/");
-        xhr.setRequestHeader("X-RapidAPI-Key", "dad20bcabbmsh57e3ee17ffa309fp14efbejsnaba5eed1ea7f");
-        xhr.setRequestHeader("X-RapidAPI-Host", "timetable-lookup.p.rapidapi.com");
-
-        xhr.send(data);
-        
-        navigate("/")
-    }
-    return(
-        <div className={"text-center bg-slate-500 h-screen mx-auto border-2 flex flex-col border-gray-700 rounded-lg"}>
-            <h1>Enter your origin followed by your destination below:</h1>
-            <Inputs placeHolder={origin} funcCall={handleOrigin}></Inputs>
-            <Inputs placeHolder={destination} funcCall={handleDestination}></Inputs>
-            <NavigateButton buttonFunction={findFlights} buttonText={"Click here to find flights"}></NavigateButton>
-
-
-        </div>
-    )
-}
+  fetch(url, options)
+	  .then(response => response.json())
+	  .then(response => console.log(response))
+	  .catch(err => console.error(err));
+};
 
 export default Flights;
